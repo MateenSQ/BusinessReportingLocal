@@ -1,0 +1,35 @@
+﻿@model BusinessReportingMVC.Models.LoginModel
+
+
+<div class="authContainer container" id="logContainer">
+    <div class="authForm">
+        <h1 class="authHeader">Login</h1>
+        @{
+            if (TempData["RegisterSuccess"] is not null)
+            {
+                <ul class="text-success">
+                    <li>@TempData["RegisterSuccess"]</li>
+                </ul>
+            }
+        }
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <form asp-controller="Account" asp-action="Login" method="post">
+            <input asp-for="ReturnUrl" type="hidden" />
+
+            <input class="form-control-lg loginInputs" asp-for="Email" type="email" placeholder="Email" aria-label="Enter Your Email" required autofocus />
+            <br />
+
+            <input class="form-control-lg loginInputs" asp-for="Password" type="password" placeholder="Password" aria-label="Enter Your Password" required />
+            <br />
+
+            <input class="form-check-input" asp-for="RememberLogin" type="checkbox" />
+            <label asp-for="RememberLogin">Remember me</label>
+            <br />
+
+            <input class="button" type="Submit" value="Login" />
+        </form>
+        <div id="RegisterDiv">
+            Don't have an account? <a id="Register" asp-controller="Account" asp-action="Register">Register Here</a>
+        </div>
+    </div>
+</div>

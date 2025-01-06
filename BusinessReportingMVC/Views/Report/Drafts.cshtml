@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BusinessReportingMVC.Models.Report>
+
+<div class="section">
+    <h1>Drafts</h1>
+    <a asp-controller="Report" asp-action="New">Create New Report</a>
+    <hr class="sectionHr" />
+    @{
+        if (TempData["SaveSuccess"] is not null)
+        {
+            <ul class="text-success">
+                <li>@TempData["SaveSuccess"]</li>
+            </ul>
+        }
+    }
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReportId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReportName)
+                </td>
+                <td>
+                    Created: @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ReportId">Edit</a> | <form id="PublishForm" asp-controller="Report" asp-action="Publish" asp-route-id="@item.ReportId" method="post"><input id="PublishSubmit" type="Submit" value="Publish" name="PublishReport" /></form> | <a asp-action="Delete" asp-route-id="@item.ReportId">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<BusinessReportingMVC.Models.Report>
+
+<div class="section">
+    <h1>Your Published Reports</h1>
+    <a asp-controller="Report" asp-action="New">Create New Report</a>
+    <hr class="sectionHr" />
+
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReportId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReportName)
+                </td>
+                <td>
+                    Created: @Html.DisplayFor(modelItem => item.CreatedDate)
+                <td>
+                    <a asp-action="View" asp-route-id="@item.ReportId">View</a> 
+                </td>
+            </tr>
+        }
+    </table>
+</div>

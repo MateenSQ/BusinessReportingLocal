@@ -1,0 +1,29 @@
+﻿@model IEnumerable<BusinessReportingMVC.Models.Report>
+
+<div class="section">
+    <h1>All Published Reports</h1>
+    <hr class="sectionHr" />
+
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReportName)
+                </td>
+                <td>
+                    From: @Html.DisplayFor(modelItem => item.FromDateRange)
+                </td>
+                <td>
+                    To: @Html.DisplayFor(modelItem => item.ToDateRange)
+                </td>
+                <td>
+                    Created by: @Html.DisplayFor(modelItem => item.CreatedByUser.Name)
+                </td>
+                <td>
+                    <a asp-action="View" asp-route-id="@item.ReportId">View</a> 
+                </td>
+            </tr>
+        }
+    </table>
+</div>

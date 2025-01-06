@@ -1,0 +1,216 @@
+/*
+    ===========
+    || _Layout
+    ===========
+*/
+
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+body {
+    margin-bottom: 60px;
+    /*background-color: #daa52030;*/
+}
+
+.logo {
+    width: 200px;
+    height: 50px;
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link  {
+    color: rgba(33, 37, 41, 100)
+}
+
+.nav-link:hover {
+    opacity: 50%;
+}
+
+#footer {
+    border-top: solid #ADADAD 2px;
+    background-color: white;
+}
+
+
+
+
+/*
+    =========================================
+    || Home, Drafts, Published, New & Delete
+    =========================================
+*/
+
+/* section new name, change */
+
+.section {
+    margin-top: 3%;
+    background-color: white;
+    padding: 2%;
+    border-radius: 5px;
+}
+
+    .section .table {
+        border-bottom: solid black 0.5px;
+    }
+
+.home {
+    margin-top: 3%;
+    padding: 2% 0 0 0;
+    background-color: white;
+}
+
+.space {
+    height: 10%;
+}
+
+/*#HomeClaims * {
+    visibility: hidden;
+}*/
+
+#welcome {
+    font-size: 3em;
+    font-weight: 300;
+}
+
+#links {
+    margin-top: 3%;
+}
+
+.homeAnch {
+    font-size: 1.7em;
+    color: black;
+    text-decoration: none;
+}
+
+    .homeAnch:hover {
+        color: black;
+        opacity: 50%;
+    }
+
+
+
+
+
+
+
+
+/*
+    ====================
+    || Edit & View Page
+    ====================
+*/
+.sectionReport {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+    .sectionReport table {
+        border-bottom: solid black 0.5px;
+    }
+
+    .sectionReport th {
+        padding-top: 3%;
+        padding-bottom: 1%;
+    }
+
+#reEnter {
+    text-decoration: underline;
+}
+
+.reportForm {
+    margin-bottom: 5%;
+}
+
+textarea {
+    width: 100%;
+}
+
+.loneHeader {
+    margin-bottom: 4%;
+}
+
+
+
+.projNameHolder {
+    width: 100%;
+}
+
+.projName {
+    display: inline-block;
+    width: 80%;
+}
+
+.button {
+    width: 10%;
+    border: solid black 1px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+    .button:hover {
+        background-color: black;
+        color: white;
+    }
+
+
+
+
+
+
+/*
+    =======================================
+    || To disguise inputs as <a> tag links
+    =======================================
+*/
+
+#PublishForm {
+    display: inline;
+}
+
+#PublishSubmit {
+    display: inline;
+    color: #0d6efd;
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+    #PublishSubmit::after {
+        color: #551A8B
+    }
+
+
+
+
+/*
+    ===========
+    || Helpers
+    ===========
+*/
+.flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flexEnd {
+    justify-content: flex-end;
+}

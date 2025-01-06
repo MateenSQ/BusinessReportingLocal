@@ -1,0 +1,14 @@
+﻿@model BusinessReportingMVC.ViewModels.SmallReportViewModel
+
+<div class="section">
+    <a asp-action="Drafts">< Back</a>
+    
+    <h1 style="margin-top: 2%;">Delete</h1>
+
+    <p>Are you sure you want to delete the report: @(Model.Name)?</p>
+
+    <form asp-controller="Report" asp-action="DeleteReport">
+        <input asp-for="Id" type="hidden" value="@Model.Id" />
+        <input class="button" type="submit" value="Delete"/>
+    </form>
+</div>

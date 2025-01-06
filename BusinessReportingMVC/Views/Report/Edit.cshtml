@@ -1,0 +1,302 @@
+﻿@model BusinessReportingMVC.ViewModels.ReportViewModel
+
+<div>
+    <form class="reportForm" asp-controller="Report" asp-action="Edit" method="post">
+        <input asp-for="ReportId" type="hidden"/>
+
+        @*
+        ==================
+        || Report Details
+        ==================
+        *@
+        <div class="sectionReport">
+            <a asp-action="Drafts">< Back</a>
+            <h2 id="reEnter" class="text-center"><em>Please re-enter dates before saving</em></h2>
+            <br />
+
+            @{
+                if (TempData["errorMessage"] is not null)
+                {
+                    <ul class="text-danger">
+                        <li>@TempData["errorMessage"]</li>
+                    </ul>
+                }
+            }
+
+            <h3 class="loneHeader">Report Details</h3>
+            <table class="table">
+                <tr>
+                    <td><label>Report Name:</label></td>
+                    <td><input class="form-control" asp-for="ReportName" type="text" value="@Model.ReportName" /></td>
+                </tr>
+                <tr>
+                    <td><label>From Date:</label></td>
+                    <td><input class="form-control" asp-for="FromDateRange" type="date" value="@Model.FromDateRange" /></td>
+                    <td>Currently from: @(Model.FromDateRange)</td>
+                </tr>
+                <tr>
+                    <td><label>To Date:</label></td>
+                    <td><input class="form-control" asp-for="ToDateRange" type="date" value="@Model.ToDateRange" /></td>
+                    <td>Currently to: @(Model.ToDateRange)</td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
+        @*
+        ==================
+        || Key Highlights
+        ==================
+        *@
+        <div class="sectionReport">
+            <h3 class="loneHeader">Key Highlights of Overall Business</h3>
+            <table class="table">
+                <tr>
+                    <td><label asp-for="KeyHighlights.Performance">Performance:</label></td>
+                    <td><textarea class="form-control" cols="100" asp-for="KeyHighlights.Performance" type="text" value="@Model.KeyHighlights.Performance"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="KeyHighlights.Risks">Risks:</label></td>
+                    <td><textarea class="form-control" cols="100" asp-for="KeyHighlights.Risks" type="text" value="@Model.KeyHighlights.Risks"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="KeyHighlights.Opportunities">Opportunities:</label></td>
+                    <td><textarea class="form-control" cols="100" asp-for="KeyHighlights.Opportunities" type="text" value="@Model.KeyHighlights.Opportunities"></textarea></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
+        @* 
+        ==============
+        || Financials
+        ==============
+        *@
+        <div class="sectionReport">
+            <h3>Financials</h3>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>Actual to date (£)</th>
+                    <th>Deviation from planned (£)</th>
+                </tr>
+                <tr>
+                    <td aria-label="Turnover actual to date and turnover deviation">Turnover</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.TurnoverActual" type="number" step="0.01" value="@Model.Financials.FinancialsActual.TurnoverActual" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.TurnoverDeviation" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.TurnoverDeviation" /></td>
+                </tr>
+                <tr>
+                    <td>Direct Costs</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.DirectCostsActual" type="number" step="0.01" value="@Model.Financials.FinancialsActual.DirectCostsActual" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.DirectCostsDeviation" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.DirectCostsDeviation" /></td>
+                </tr>
+                <tr>
+                    <td>Gross Profit</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.GrossProfitActual" type="number" step="0.01" value="@Model.Financials.FinancialsActual.GrossProfitActual" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.GrossProfitDeviation" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.GrossProfitDeviation" /></td>
+                </tr>
+                <tr>
+                    <td>Indirect Costs</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.IndirectCostsActual" type="number" step="0.01" value="@Model.Financials.FinancialsActual.IndirectCostsActual" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.IndirectCostsDeviation" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.IndirectCostsDeviation" /></td>
+                </tr>
+                <tr>
+                    <td>Net Profit</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.NetProfitActual" type="number" step="0.01" value="@Model.Financials.FinancialsActual.NetProfitActual" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.NetProfitDeviation" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.NetProfitDeviation" /></td>
+                </tr>
+                <tr>
+                    <td>WIP</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.WipActual" type="number" step="0.01" value="@Model.Financials.FinancialsActual.WipActual" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.WipDeviation" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.WipDeviation" /></td>
+                </tr>
+                <br />
+                <tr>
+                    <th></th>
+                    <th>This quarter</th>
+                    <th>Deviation from planned</th>
+                </tr>
+                <tr>
+                    <td>Production hours work</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.ProductionHoursQuarter" type="number" step="0.01" value="@Model.Financials.FinancialsActual.ProductionHoursQuarter" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.ProductionHoursDeviation" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.ProductionHoursDeviation" /></td>
+                </tr>
+                <tr>
+                    <td>Utilisation (%)</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.UtilisationQuarter" type="number" step="0.01" value="@Model.Financials.FinancialsActual.UtilisationQuarter" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.UtilisationQuarter" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.UtilisationQuarter" /></td>
+                </tr>
+                <tr>
+                    <td>Work in hand (hours)</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.WorkInHandHoursQuarter" type="number" step="0.01" value="@Model.Financials.FinancialsActual.WorkInHandHoursQuarter" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.WorkInHandHoursQuarter" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.WorkInHandHoursQuarter" /></td>
+                </tr>
+                <tr>
+                    <td>Work in hand (£)</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.WorkInHandMoneyQuarter" type="number" step="0.01" value="@Model.Financials.FinancialsActual.WorkInHandMoneyQuarter" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.WorkInHandMoneyQuarter" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.WorkInHandMoneyQuarter" /></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Actual to date</th>
+                    <th>Forecast for next quarter</th>
+                </tr>
+                <tr>
+                    <td>Cash Position</td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsActual.CashPositionActual" type="number" step="0.01" value="@Model.Financials.FinancialsActual.CashPositionActual" /></td>
+                    <td><input class="form-control" asp-for="Financials.FinancialsDeviation.CashPositionForecast" type="number" step="0.01" value="@Model.Financials.FinancialsDeviation.CashPositionForecast" /></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
+        @*
+        ========================
+        || Business Development
+        ========================
+        *@
+        <div class="sectionReport">
+            <h3>Business Development</h3>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>Value (£)</th>
+                    <th>Points of note</th>
+                </tr>
+                <tr>
+                    <td>Awareness (distant prospects)</td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentValue.AwarenessValue" type="number" step="0.01" value="@Model.BusinessDevelopment.BusinessDevelopmentValue.AwarenessValue" /></td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentNote.AwarenessNotes" type="text" value="@Model.BusinessDevelopment.BusinessDevelopmentNote.AwarenessNotes" /></td>
+                </tr>
+                <tr>
+                    <td>Intent (close prospects)</td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentValue.IntentValue" type="number" step="0.01" value="@Model.BusinessDevelopment.BusinessDevelopmentValue.IntentValue" /></td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentNote.IntentNotes" type="text" /></td>
+                </tr>
+                <tr>
+                    <td>Tendered (0 - 33% probability in next qtr)</td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentValue.Tendered033Value" type="number" step="0.01" value="@Model.BusinessDevelopment.BusinessDevelopmentValue.Tendered033Value" /></td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentNote.Tendered033Notes" type="text" value="@Model.BusinessDevelopment.BusinessDevelopmentNote.Tendered033Notes" /></td>
+                </tr>
+                <tr>
+                    <td>Tendered (34 - 66% probability in next qtr)</td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentValue.Tendered3466Value" type="number" step="0.01" value="@Model.BusinessDevelopment.BusinessDevelopmentValue.Tendered3466Value" /></td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentNote.Tendered3466Notes" type="text" value="@Model.BusinessDevelopment.BusinessDevelopmentNote.Tendered3466Notes" /></td>
+                </tr>
+                <tr>
+                    <td>Tendered (67 - 100% probability in next qtr)</td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentValue.Tendered67100Value" type="number" step="0.01" value="@Model.BusinessDevelopment.BusinessDevelopmentValue.Tendered67100Value" /></td>
+                    <td><input class="form-control" asp-for="BusinessDevelopment.BusinessDevelopmentNote.Tendered67100Notes" type="text" value="@Model.BusinessDevelopment.BusinessDevelopmentNote.Tendered67100Notes" /></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
+        @*
+        ============
+        || Strategy
+        ============
+        *@
+        <div class="sectionReport">
+            <h3 class="loneHeader">Strategy (Initatives)</h3>
+            <table class="table">
+                <tr>
+                    <td><label asp-for="Strategy.BusinessDevelopment">Business Development</label></td>
+                    <td><textarea class="form-control" cols="100" asp-for="Strategy.BusinessDevelopment" type="text" value="@Model.Strategy.BusinessDevelopment"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Strategy.Innovation">Innovation</label></td>
+                    <td><textarea class="form-control" cols="100" asp-for="Strategy.Innovation" type="text" value="@Model.Strategy.Innovation"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="Strategy.Other">Other</label></td>
+                    <td><textarea class="form-control" cols="100" asp-for="Strategy.Other" type="text" value="@Model.Strategy.Other"></textarea></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
+        @*
+        ============
+        || Projects
+        ============
+        *@
+        <div class="sectionReport">
+            <h3>Projects</h3>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>Forecast Profit (completion) (£)</th>
+                    <th>Deviation from previous quarter (£)</th>
+                </tr>
+                <tr>
+                    <td>Overall Performance</td>
+                    <td><input class="form-control" asp-for="Projects.ForecastOverallForecast" type="number" step="0.01" value="@Model.Projects.ForecastOverallForecast" /></td>
+                    <td><input class="form-control" asp-for="Projects.ForecastOverallDeviation" type="number" step="0.01" value="@Model.Projects.ForecastOverallDeviation" /></td>
+                </tr>
+                <tr>
+                    <th>Top 5 (Project Code + Name)</th>
+                </tr>
+
+                @for (int i = 0; i < 5; i++)
+                {
+                    <input asp-for="Projects.ProjectIndividual[i].IsBottom" type="hidden" />
+                    <input asp-for="Projects.ProjectIndividual[i].Position" type="hidden" />
+                    <tr>
+                        <td>
+                            <div class="projNameHolder"><label asp-for="Projects.ProjectIndividual[i].ProjectName">@(i + 1):</label> <input class="form-control projName" asp-for="Projects.ProjectIndividual[i].ProjectName" type="text" value="@Model.Projects.ProjectIndividual[i].ProjectName" /></div>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Projects.ProjectIndividual[i].ForecastProfit" type="number" step="0.01" value="@Model.Projects.ProjectIndividual[i].ForecastProfit" />
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Projects.ProjectIndividual[i].Deviation" type="number" step="0.01" value="@Model.Projects.ProjectIndividual[i].Deviation" />
+                        </td>
+                    </tr>
+                }
+
+                <tr>
+                    <th>Bottom 5 (Project Code + Name)</th>
+                </tr>
+
+                @for (int i = 5; i < 10; i++)
+                {
+                    <input asp-for="Projects.ProjectIndividual[i].IsBottom" type="hidden" />
+                    <input asp-for="Projects.ProjectIndividual[i].Position" type="hidden" />
+                    <tr>
+                        <td>
+                            <div class="projNameHolder"><label asp-for="Projects.ProjectIndividual[i].ProjectName">@(i - 4):</label> <input class="form-control projName" asp-for="Projects.ProjectIndividual[i].ProjectName" type="text" value="@Model.Projects.ProjectIndividual[i].ProjectName" /></div>
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Projects.ProjectIndividual[i].ForecastProfit" type="number" step="0.01" value="@Model.Projects.ProjectIndividual[i].ForecastProfit" />
+                        </td>
+                        <td>
+                            <input class="form-control" asp-for="Projects.ProjectIndividual[i].Deviation" type="number" step="0.01" value="@Model.Projects.ProjectIndividual[i].Deviation" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <br />
+
+        @*
+        =======================
+        || Admin and Resources
+        =======================
+        *@
+        <div class="sectionReport">
+            <h3 class="loneHeader">Admin and Resources</h3>
+            <table class="table">
+                <tr>
+                    <td><label asp-for="AdminAndResources.PointsOfNote">Points of note:</label></td>
+                    <td><textarea class="form-control" cols="100" asp-for="AdminAndResources.PointsOfNote" type="text" value="@Model.AdminAndResources.PointsOfNote"></textarea></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
+        <div class="saveDiv">
+            <input class="button" type="Submit" value="Save" name="SaveReport" />
+        </div>
+    </form>
+</div>

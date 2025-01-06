@@ -1,0 +1,36 @@
+﻿@model BusinessReportingMVC.ViewModels.UserViewModel
+
+
+<div class="authContainer container" id="regContainer">
+    <div class="authForm">
+    <a asp-action="Login">< Login</a>
+    <h1 class="authHeader">Register</h1>
+        @if (ViewBag.Error is not null)
+        {
+            <ul class="text-danger">
+                <li>@ViewBag.Error</li>
+            </ul>
+        }
+        <form asp-controller="Account" asp-action="Register" method="post">
+            <div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="Email">Email: </label>
+                    <input class="form-control" asp-for="Email" type="email" required autofocus />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="Name">Name: </label>
+                    <input class="form-control" asp-for="Name" type="text" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="Password">Password: </label>
+                    <input class="form-control" asp-for="Password" type="password" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="ConfirmPassword">Confirm Password: </label>
+                    <input class="form-control" asp-for="ConfirmPassword" type="password" required />
+                </div>
+            </div>
+            <input class="button" type="submit" value="Register" />
+        </form>
+    </div>
+</div>

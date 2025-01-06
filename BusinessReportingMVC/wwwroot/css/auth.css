@@ -1,0 +1,132 @@
+﻿/*
+    ==========
+    || Preset
+    ==========
+*/
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background: linear-gradient(60deg, #C7CBE870, #0F4DA370, #74C54470, #F6272F70);
+    background-size: 400% 400%;
+    animation: gradientBG 60s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/*
+    ===========
+    || _Layout
+    ===========
+*/
+
+.logo {
+    width: 200px;
+    height: 50px;
+}
+
+
+/*
+    ==============
+    || Login Page
+    ==============
+*/
+/*html {
+    padding-top: 3%;
+}*/
+
+.container .authContainer {
+    /*margin-top: 3%;*/
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+    align-items: center;
+}
+
+#logContainer {
+    margin-top: 3%;
+}
+
+#regContainer {
+    margin-top: 5%;
+}
+
+
+.authHeader {
+    font-size: 3.5em;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+.authForm {
+    width: 50%;
+    padding: 20px 40px;
+    border: solid;
+    border-width: 5px;
+    border-color: #D5B03A90;
+    background-color: white;
+}
+
+.loginInputs {
+    margin: 1% 0;
+    width: 100%;
+    font-weight: 350;
+}
+
+.authBtn {
+    margin-top: 5%;
+    margin-bottom: 2%;
+    width: 100%;
+    border-width: 200px;
+    border: none;
+}
+
+    .authBtn:hover {
+        background-color: #D5B03A50;
+        transition: background-color 300ms linear;
+    }
+
+.button {
+    margin-top: 5%;
+    margin-bottom: 2%;
+    width: 100%;
+    border: solid black 1px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+    .button:hover {
+        background-color: white;
+        color: black;
+    }
