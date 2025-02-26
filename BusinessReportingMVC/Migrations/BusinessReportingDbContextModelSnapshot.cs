@@ -152,35 +152,14 @@ namespace BusinessReportingMVC.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Claim_Name");
 
-                    b.Property<long>("ClaimTypeId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("Claim_Type_Id");
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Claim_Type");
 
                     b.HasKey("ClaimId")
                         .HasName("PK__Claims__811C4A6D4D13DDD4");
 
-                    b.HasIndex("ClaimTypeId");
-
-                    b.ToTable("Claims", (string)null);
-                });
-
-            modelBuilder.Entity("BusinessReportingMVC.Models.ClaimsType", b =>
-                {
-                    b.Property<long>("ClaimsTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("Claims_Type_Id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ClaimsTypeId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ClaimsTypeId")
-                        .HasName("PK__Claims_T__39C8D340E20773DF");
-
-                    b.ToTable("Claims_Type", (string)null);
+                    b.ToTable("Claims");
                 });
 
             modelBuilder.Entity("BusinessReportingMVC.Models.Financial", b =>
@@ -207,7 +186,7 @@ namespace BusinessReportingMVC.Migrations
 
                     b.HasIndex("FinancialsDeviationId");
 
-                    b.ToTable("Financials", (string)null);
+                    b.ToTable("Financials");
                 });
 
             modelBuilder.Entity("BusinessReportingMVC.Models.FinancialsActual", b =>
@@ -361,18 +340,18 @@ namespace BusinessReportingMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ProjectId"));
 
-                    b.Property<string>("ForecastOverallDeviation")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<decimal?>("ForecastOverallDeviation")
+                        .HasColumnType("money")
                         .HasColumnName("Forecast_Overall_Deviation");
 
-                    b.Property<string>("ForecastOverallForecast")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<decimal?>("ForecastOverallForecast")
+                        .HasColumnType("money")
                         .HasColumnName("Forecast_Overall_Forecast");
 
                     b.HasKey("ProjectId")
                         .HasName("PK__Projects__1CB92E037A0932F6");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("BusinessReportingMVC.Models.ProjectIndividual", b =>
@@ -402,7 +381,7 @@ namespace BusinessReportingMVC.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Project_Code");
 
-                    b.Property<long?>("ProjectId")
+                    b.Property<long>("ProjectId")
                         .HasColumnType("bigint")
                         .HasColumnName("Project_Id");
 
@@ -411,7 +390,7 @@ namespace BusinessReportingMVC.Migrations
                         .HasColumnName("Project_Name");
 
                     b.HasKey("ProjectIndividualId")
-                        .HasName("PK__Project___D45D6EACF89E5767");
+                        .HasName("PK__Project___D45D6EACB196AC01");
 
                     b.HasIndex("ProjectId");
 
@@ -450,6 +429,10 @@ namespace BusinessReportingMVC.Migrations
                     b.Property<DateTime?>("FromDateRange")
                         .HasColumnType("datetime")
                         .HasColumnName("From_Date_Range");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("Is_Deleted");
 
                     b.Property<bool>("IsDraft")
                         .HasColumnType("bit")
@@ -492,7 +475,7 @@ namespace BusinessReportingMVC.Migrations
 
                     b.HasIndex("StrategyId");
 
-                    b.ToTable("Reports", (string)null);
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("BusinessReportingMVC.Models.Strategy", b =>
@@ -552,7 +535,7 @@ namespace BusinessReportingMVC.Migrations
                     b.HasKey("UserId")
                         .HasName("PK__Users__206D9170FEAFF174");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BusinessReportingMVC.Models.UserClaim", b =>
@@ -601,17 +584,6 @@ namespace BusinessReportingMVC.Migrations
                     b.Navigation("BusinessDevelopmentValue");
                 });
 
-            modelBuilder.Entity("BusinessReportingMVC.Models.Claim", b =>
-                {
-                    b.HasOne("BusinessReportingMVC.Models.ClaimsType", "ClaimType")
-                        .WithMany("Claims")
-                        .HasForeignKey("ClaimTypeId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Claim_Type_Id");
-
-                    b.Navigation("ClaimType");
-                });
-
             modelBuilder.Entity("BusinessReportingMVC.Models.Financial", b =>
                 {
                     b.HasOne("BusinessReportingMVC.Models.FinancialsActual", "FinancialsActual")
@@ -636,6 +608,7 @@ namespace BusinessReportingMVC.Migrations
                     b.HasOne("BusinessReportingMVC.Models.Project", "Project")
                         .WithMany("ProjectIndividuals")
                         .HasForeignKey("ProjectId")
+                        .IsRequired()
                         .HasConstraintName("FK_Project_Individual_Project_Id");
 
                     b.Navigation("Project");
@@ -742,11 +715,6 @@ namespace BusinessReportingMVC.Migrations
             modelBuilder.Entity("BusinessReportingMVC.Models.Claim", b =>
                 {
                     b.Navigation("UserClaims");
-                });
-
-            modelBuilder.Entity("BusinessReportingMVC.Models.ClaimsType", b =>
-                {
-                    b.Navigation("Claims");
                 });
 
             modelBuilder.Entity("BusinessReportingMVC.Models.Financial", b =>

@@ -92,5 +92,14 @@ namespace BusinessReportingMVC.Controllers
             ViewBag.Error = result.Message;
             return View();
         }
+
+        // ==============================
+        // || Account Management Methods
+        // ==============================
+        public IActionResult Manage()
+        {
+            return View();
+        }
+
     }
 }
