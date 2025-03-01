@@ -97,9 +97,13 @@ namespace BusinessReportingMVC.Controllers
         // || Account Management Methods
         // ==============================
         public IActionResult Manage()
-        {
+        { 
             return View();
         }
 
+        public IActionResult PersonalInformation()
+        {
+            return View();
+        }
     }
 }
