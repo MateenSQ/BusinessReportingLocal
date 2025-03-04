@@ -11,6 +11,10 @@
         <a class="homeAnch" asp-controller="Account" asp-action="PersonalInformation">Manage Personal Information</a>
         <br />
 
-        <a class="homeAnch" asp-controller="Admin" asp-action="ManageUsers">Manage Other Users</a>
+        @if (User.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value == "Admin")
+        {
+            <a class="homeAnch" asp-controller="Admin" asp-action="ManageUsers">Manage Other Users</a>
+        }
+        
     </div>
 </div>

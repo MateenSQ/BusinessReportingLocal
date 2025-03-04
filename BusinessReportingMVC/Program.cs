@@ -30,10 +30,12 @@ builder.Services.AddAuthentication(options =>
     .AddCookie("DefaultCookie");
 
 builder.Services.AddAuthorizationBuilder()
-    .AddPolicy("Approved", policy => 
+    .AddPolicy("Approved", policy =>
         policy.RequireClaim("Approved", "True"))
     .AddPolicy("SeachtAccess", policy =>
-        policy.RequireClaim("Position", "Seacht"));
+        policy.RequireClaim("Position", "Seacht"))
+    .AddPolicy("AdminOnly", policy =>
+        policy.RequireClaim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "Admin"));
 
 
 // ======================
