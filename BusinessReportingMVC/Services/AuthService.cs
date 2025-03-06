@@ -70,7 +70,8 @@ namespace BusinessReportingMVC.Services
                 };
             }
 
-            user = await _repo.GetAllUserClaimsAsync(user);
+            // HERE
+            user = await _repo.GetUserAndClaimsAsync(user);
 
             string roleClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Role").Claim.ClaimName;
             string positionClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Position").Claim.ClaimName;
@@ -173,6 +174,13 @@ namespace BusinessReportingMVC.Services
                 IsSuccess = true,
                 Message = "Successfully Registered"
             };
+        }
+
+        public async Task<PersonalInfoViewModel> GetPersonalInfoAsync(long id)
+        {
+            //_repo.GetAllUserClaimsAsync
+
+            return new PersonalInfoViewModel();
         }
     }
 }

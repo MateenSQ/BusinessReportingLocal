@@ -44,7 +44,7 @@ namespace BusinessReportingMVC.Repositories
             return null;
         }
 
-        public async Task<User?> GetAllUserClaimsAsync(User user)
+        public async Task<User?> GetUserAndClaimsAsync(User user) // Change this shit to use a long then adjust where its being used
         {
             return await _context.Users
                                     .Include(r => r.UserClaims)

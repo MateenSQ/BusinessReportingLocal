@@ -96,13 +96,33 @@ namespace BusinessReportingMVC.Controllers
         // ==============================
         // || Account Management Methods
         // ==============================
+        [Authorize(Policy = "Approved")]
         public IActionResult Manage()
         { 
             return View();
         }
 
-        public IActionResult PersonalInformation()
+        [Authorize(Policy = "Approved")]
+        public IActionResult PersonalInformation(string stringId) // Can't set claims as ints so was set to string. Needs to be parsed to int to be used in repo
         {
+            long receivedID = long.Parse(stringId);
+
+            long userIDClaim = _authService.GetIDClaim();
+
+            if (receivedID != userIDClaim)
+            {
+                return Unauthorized();
+            }
+
+            // || Plan
+
+            /*
+            - Create a new view model, "personal info" or so that has fields for all information to be displayed on the page
+            - Create new method in the auth service to fetch all the data and map it onto a view model which gets returned here
+            - Hand the view model into the view
+            - Display the user's information in the view using razor syntax
+            */
+
             return View();
         }
     }
