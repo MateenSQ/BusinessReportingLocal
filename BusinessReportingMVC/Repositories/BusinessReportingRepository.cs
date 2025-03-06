@@ -44,12 +44,12 @@ namespace BusinessReportingMVC.Repositories
             return null;
         }
 
-        public async Task<User?> GetUserAndClaimsAsync(User user) // Change this shit to use a long then adjust where its being used
+        public async Task<User?> GetUserAndClaimsAsync(long id) // Change 
         {
             return await _context.Users
                                     .Include(r => r.UserClaims)
                                         .ThenInclude(uc => uc.Claim)
-                                    .FirstOrDefaultAsync(r => r.UserId == user.UserId);
+                                    .FirstOrDefaultAsync(r => r.UserId == id);
         }
 
         public async Task<List<Claim>> GetAllDBClaimsAsync()

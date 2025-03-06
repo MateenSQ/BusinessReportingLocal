@@ -70,8 +70,7 @@ namespace BusinessReportingMVC.Services
                 };
             }
 
-            // HERE
-            user = await _repo.GetUserAndClaimsAsync(user);
+            user = await _repo.GetUserAndClaimsAsync(user.UserId);
 
             string roleClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Role").Claim.ClaimName;
             string positionClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Position").Claim.ClaimName;
