@@ -177,9 +177,20 @@ namespace BusinessReportingMVC.Services
 
         public async Task<PersonalInfoViewModel> GetPersonalInfoAsync(long id)
         {
-            //_repo.GetAllUserClaimsAsync
+            User? user = await _repo.GetUserAndClaimsAsync(id);
 
-            return new PersonalInfoViewModel();
+            string dbPositionClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Position").Claim.ClaimName;
+            string dbRoleClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Role").Claim.ClaimName;
+
+            PersonalInfoViewModel personalViewModel = new()
+            {
+                Name = user.Name,
+                Email = user.Email,
+                Position = dbPositionClaim,
+                Role = dbRoleClaim
+            };
+
+            return personalViewModel;
         }
     }
 }

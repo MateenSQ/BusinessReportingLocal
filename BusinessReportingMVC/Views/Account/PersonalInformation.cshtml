@@ -1,9 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model BusinessReportingMVC.ViewModels.PersonalInfoViewModel
+
 @{
 }
 
 <div class="section">
     <h1>Personal Info</h1>
+
+    <br />
+
+    <p><strong>Name:</strong>   @Model.Name</p>
+    <p><strong>Email:</strong>   @Model.Email</p>
+    <p><strong>Position:</strong>   @Model.Position</p>
+    <p><strong>Role:</strong>   @Model.Role</p>
 </div> 

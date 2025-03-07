@@ -103,7 +103,7 @@ namespace BusinessReportingMVC.Controllers
         }
 
         [Authorize(Policy = "Approved")]
-        public IActionResult PersonalInformation(string stringId) // Can't set claims as ints so was set to string. Needs to be parsed to int to be used in repo
+        public async Task<IActionResult> PersonalInformation(string stringId) // Can't set claims as ints so was set to string. Needs to be parsed to int to be used in repo
         {
             long receivedID = long.Parse(stringId);
 
@@ -123,7 +123,9 @@ namespace BusinessReportingMVC.Controllers
             - Display the user's information in the view using razor syntax
             */
 
-            return View();
+            PersonalInfoViewModel personalInfo = await _authService.GetPersonalInfoAsync(userIDClaim);
+
+            return View(personalInfo);
         }
     }
 }
