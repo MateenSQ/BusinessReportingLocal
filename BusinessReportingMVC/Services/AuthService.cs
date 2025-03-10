@@ -184,6 +184,7 @@ namespace BusinessReportingMVC.Services
 
             PersonalInfoViewModel personalViewModel = new()
             {
+                Id = user.UserId,
                 Name = user.Name,
                 Email = user.Email,
                 Position = dbPositionClaim,

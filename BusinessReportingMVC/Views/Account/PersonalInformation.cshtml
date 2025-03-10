@@ -12,4 +12,13 @@
     <p><strong>Email:</strong>   @Model.Email</p>
     <p><strong>Position:</strong>   @Model.Position</p>
     <p><strong>Role:</strong>   @Model.Role</p>
+
+    <br />
+    <br />
+    <br />
+
+    <a asp-controller="Account" asp-action="DeleteInfo" asp-route-id="@Model.Id">Delete My Personal Information</a>
+    @{
+        Console.WriteLine(Model.Id);
+    }
 </div> 

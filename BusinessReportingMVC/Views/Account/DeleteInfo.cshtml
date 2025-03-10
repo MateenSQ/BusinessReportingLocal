@@ -1,0 +1,18 @@
+﻿@model long
+
+<div class="section">
+    <h1>Delete My Information</h1>
+    <br />
+
+    <p>Are you sure you want to delete all your personal information from storage?</p>
+    <br />
+
+    @{
+        Console.WriteLine(Model);
+    }
+
+    <form asp-controller="Account" asp-action="DeletePersonalInfo" asp-route-id="@Model">
+        <input name="id" type="hidden" value="@Model" />
+        <input class="button" type="submit" value="Delete My Information" />
+    </form>
+</div>

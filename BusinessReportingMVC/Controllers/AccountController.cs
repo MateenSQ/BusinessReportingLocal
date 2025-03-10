@@ -103,7 +103,7 @@ namespace BusinessReportingMVC.Controllers
         }
 
         [Authorize(Policy = "Approved")]
-        public async Task<IActionResult> PersonalInformation(string stringId) // Can't set claims as ints so was set to string. Needs to be parsed to int to be used in repo
+        public async Task<IActionResult> PersonalInformation(string stringId)
         {
             long receivedID = long.Parse(stringId);
 
@@ -114,18 +114,26 @@ namespace BusinessReportingMVC.Controllers
                 return Unauthorized();
             }
 
-            // || Plan
-
-            /*
-            - Create a new view model, "personal info" or so that has fields for all information to be displayed on the page
-            - Create new method in the auth service to fetch all the data and map it onto a view model which gets returned here
-            - Hand the view model into the view
-            - Display the user's information in the view using razor syntax
-            */
-
             PersonalInfoViewModel personalInfo = await _authService.GetPersonalInfoAsync(userIDClaim);
 
             return View(personalInfo);
+        }
+
+        [Authorize(Policy = "Approved")]
+        public IActionResult DeleteInfo(long Id)
+        {
+            return View(Id);
+        }
+
+        [HttpPost]
+        public IActionResult DeletePersonalInfo(long Id)
+        {
+            // Id is being successfully picked up. Make service method 
+            
+
+            // Invoke logout method before routing to login
+
+            return Redirect("./Login");
         }
     }
 }
