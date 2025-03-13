@@ -364,7 +364,7 @@ public partial class BusinessReportingDbContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.UserClaims)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_User_Claims");
         });
 

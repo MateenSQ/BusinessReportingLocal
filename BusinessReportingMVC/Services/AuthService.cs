@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 // Aliases
 using SecurityClaim = System.Security.Claims.Claim;
 using ModelClaim = BusinessReportingMVC.Models.Claim;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessReportingMVC.Services
 {
@@ -192,6 +193,15 @@ namespace BusinessReportingMVC.Services
             };
 
             return personalViewModel;
+        }
+
+        public async Task DeleteUser(long id)
+        {
+            User user = await _context.Users.Include(u => u.UserClaims).FirstOrDefaultAsync(u => u.UserId == id);
+
+            _context.Remove(user);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

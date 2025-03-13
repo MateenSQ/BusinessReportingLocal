@@ -126,14 +126,15 @@ namespace BusinessReportingMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeletePersonalInfo(long Id)
+        public async Task<IActionResult> DeletePersonalInfo(long Id)
         {
             // Id is being successfully picked up. Make service method 
-            
+            await _authService.DeleteUser(Id);
 
             // Invoke logout method before routing to login
+            await HttpContext.SignOutAsync("DefaultCookie");
 
-            return Redirect("./Login");
+            return Redirect("../Login");
         }
     }
 }
