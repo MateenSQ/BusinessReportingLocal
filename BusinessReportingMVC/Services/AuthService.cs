@@ -176,32 +176,6 @@ namespace BusinessReportingMVC.Services
             };
         }
 
-        public async Task<PersonalInfoViewModel> GetPersonalInfoAsync(long id)
-        {
-            User? user = await _repo.GetUserAndClaimsAsync(id);
 
-            string dbPositionClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Position").Claim.ClaimName;
-            string dbRoleClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Role").Claim.ClaimName;
-
-            PersonalInfoViewModel personalViewModel = new()
-            {
-                Id = user.UserId,
-                Name = user.Name,
-                Email = user.Email,
-                Position = dbPositionClaim,
-                Role = dbRoleClaim
-            };
-
-            return personalViewModel;
-        }
-
-        public async Task DeleteUser(long id)
-        {
-            User user = await _context.Users.Include(u => u.UserClaims).FirstOrDefaultAsync(u => u.UserId == id);
-
-            _context.Remove(user);
-
-            await _context.SaveChangesAsync();
-        }
     }
 }

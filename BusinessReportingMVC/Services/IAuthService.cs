@@ -10,9 +10,5 @@ namespace BusinessReportingMVC.Services
         public Task<Result> HandleLoginAsync(LoginModel model);
 
         public Task<Result> HandleRegisterAsync(UserViewModel model);
-
-        public Task<PersonalInfoViewModel> GetPersonalInfoAsync(long id);
-
-        public Task DeleteUser(long id);
     }
 }

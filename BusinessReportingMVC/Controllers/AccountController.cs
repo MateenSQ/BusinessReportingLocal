@@ -17,11 +17,13 @@ namespace BusinessReportingMVC.Controllers
     {
         private readonly IBusinessReportingRepository _repo;
         private readonly IAuthService _authService;
+        private readonly IAdminService _adminService;
 
-        public AccountController(IBusinessReportingRepository Repo, IAuthService AuthService)
+        public AccountController(IBusinessReportingRepository Repo, IAuthService AuthService, IAdminService AdminService)
         {
             _repo = Repo;
             _authService = AuthService;
+            _adminService = AdminService;
         }
 
         public IActionResult Index()
@@ -114,7 +116,7 @@ namespace BusinessReportingMVC.Controllers
                 return Unauthorized();
             }
 
-            PersonalInfoViewModel personalInfo = await _authService.GetPersonalInfoAsync(userIDClaim);
+            PersonalInfoViewModel personalInfo = await _adminService.GetPersonalInfoAsync(userIDClaim);
 
             return View(personalInfo);
         }
@@ -129,7 +131,7 @@ namespace BusinessReportingMVC.Controllers
         public async Task<IActionResult> DeletePersonalInfo(long Id)
         {
             // Id is being successfully picked up. Make service method 
-            await _authService.DeleteUser(Id);
+            await _adminService.DeleteUser(Id);
 
             // Invoke logout method before routing to login
             await HttpContext.SignOutAsync("DefaultCookie");
