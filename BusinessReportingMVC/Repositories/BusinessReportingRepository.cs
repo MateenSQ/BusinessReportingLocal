@@ -102,5 +102,17 @@ namespace BusinessReportingMVC.Repositories
                                     .Include(r => r.CreatedByUser)
                                     .ToListAsync();
         }
+
+        // =========
+        // || Admin
+        // =========
+        public async Task<List<User>> GetAllNonAdminUsers()
+        {
+            return await _context.Users
+                .Include(u => u.UserClaims)
+                    .ThenInclude(uc => uc.Claim)
+                .Where(u => !u.UserClaims.Any(uc => uc.Claim.ClaimName == "Admin"))
+                .ToListAsync();
+        }
     }
 }

@@ -1,8 +1,52 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<BusinessReportingMVC.ViewModels.PersonalInfoViewModel>
+
 <div class="section">
     <h1>Manage Users</h1>
+    <hr />
+
+    <table class="table">
+        <tr>
+            <td>
+                <strong>Email</strong>
+            </td>
+            <td>
+                <strong>Name</strong>
+            </td>
+            <td>
+                <strong>Position</strong>
+            </td>
+            <td>
+                <strong>Role</strong>
+            </td>
+            <td>
+                <strong>Is Approved</strong>
+            </td>
+            <td>
+                <!-- For layout -->
+            </td>
+        </tr>
+        @foreach (var item in Model) 
+        {
+             <tr>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Email)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Name)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Position)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Role)
+                 </td>
+                 <td>
+                     @item.Approved
+                 </td>
+                 <td>
+                     <a asp-controller="Admin" asp-action="" asp-route-id="@item.Id">Edit</a>
+                 </td>
+             </tr>
+        }
+    </table>
 </div>

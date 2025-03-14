@@ -3,6 +3,7 @@ using BusinessReportingMVC.Models;
 using BusinessReportingMVC.Repositories;
 using BusinessReportingMVC.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace BusinessReportingMVC.Services
 {
@@ -44,6 +45,28 @@ namespace BusinessReportingMVC.Services
             _context.Remove(user);
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<PersonalInfoViewModel>> GetAllNonAdmins()
+        {
+            List<User> nonAdminDB = await _repo.GetAllNonAdminUsers();
+
+            List<PersonalInfoViewModel> nonAdminUsers = new();
+
+            foreach (User user in nonAdminDB)
+            {
+                nonAdminUsers.Add(new PersonalInfoViewModel
+                {
+                    Id = user.UserId,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Approved = user.IsApproved,
+                    Role = user.UserClaims.First(uc => uc.Claim.ClaimType == "Role").Claim.ClaimName,
+                    Position = user.UserClaims.First(uc => uc.Claim.ClaimType == "Position").Claim.ClaimName,
+                });
+            }
+
+            return nonAdminUsers;
         }
     }
 }

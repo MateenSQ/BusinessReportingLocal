@@ -7,5 +7,7 @@ namespace BusinessReportingMVC.Services
         public Task<PersonalInfoViewModel> GetPersonalInfoAsync(long id);
 
         public Task DeleteUser(long id);
+
+        public Task<List<PersonalInfoViewModel>> GetAllNonAdmins();
     }
 }
