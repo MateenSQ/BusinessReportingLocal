@@ -68,5 +68,36 @@ namespace BusinessReportingMVC.Services
 
             return nonAdminUsers;
         }
+
+        public async Task<PersonalInfoViewModel> GetUserAndMapToViewModel(long id)
+        {
+            User user = await _repo.GetUserAndClaimsAsync(id);
+
+            PersonalInfoViewModel UserInfo = new PersonalInfoViewModel
+            {
+                Id = user.UserId,
+                Name = user.Name,
+                Email = user.Email,
+                Approved=user.IsApproved,
+                Role = user.UserClaims.First(uc => uc.Claim.ClaimType == "Role").Claim.ClaimName,
+                Position = user.UserClaims.First(uc => uc.Claim.ClaimType == "Position").Claim.ClaimName
+            };
+
+            return UserInfo;
+        }
+
+        public async Task UpdateUserInformation(PersonalInfoViewModel submittedUserInfo)
+        {
+            User user = await _context.Users
+                .Include(u => u.UserClaims)
+                    .ThenInclude(uc => uc.Claim)
+                .FirstOrDefaultAsync(u => u.UserId == submittedUserInfo.Id);
+
+            user.IsApproved = (bool)submittedUserInfo.Approved;
+            user.UserClaims.FirstOrDefault(uc => uc.Claim.ClaimType == "Position").Claim.ClaimName = submittedUserInfo.Position;
+            user.UserClaims.FirstOrDefault(uc => uc.Claim.ClaimType == "Role").Claim.ClaimName = submittedUserInfo.Role;
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

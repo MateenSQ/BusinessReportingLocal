@@ -1,4 +1,6 @@
-﻿using BusinessReportingMVC.Services;
+﻿using BusinessReportingMVC.Repositories;
+using BusinessReportingMVC.Services;
+using BusinessReportingMVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,6 +33,29 @@ namespace BusinessReportingMVC.Controllers
             */
 
             return View(await _adminService.GetAllNonAdmins());
+        }
+
+        public async Task<IActionResult> EditUser(long id)
+        {
+            /*
+            - Find individual user and claims from ID. X
+            - Map it to a view model and send it to the front end X
+            - Create a form that enables the user to change their claims
+            - Create HTTP post method to receive the changes and update the database accordingly
+            - reroute back to the manage users page (if possible)
+            */
+
+            PersonalInfoViewModel userToBeEdited = await _adminService.GetUserAndMapToViewModel(id);
+
+            return View(userToBeEdited);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(PersonalInfoViewModel editedUser)
+        {
+            await _adminService.UpdateUserInformation(editedUser);
+
+            return Redirect("../ManageUsers");
         }
     }
 }
