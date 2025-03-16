@@ -17,11 +17,13 @@ namespace BusinessReportingMVC.Controllers
     {
         private readonly IBusinessReportingRepository _repo;
         private readonly IAuthService _authService;
+        private readonly IAdminService _adminService;
 
-        public AccountController(IBusinessReportingRepository Repo, IAuthService AuthService)
+        public AccountController(IBusinessReportingRepository Repo, IAuthService AuthService, IAdminService AdminService)
         {
             _repo = Repo;
             _authService = AuthService;
+            _adminService = AdminService;
         }
 
         public IActionResult Index()
@@ -96,14 +98,45 @@ namespace BusinessReportingMVC.Controllers
         // ==============================
         // || Account Management Methods
         // ==============================
+        [Authorize(Policy = "Approved")]
         public IActionResult Manage()
         { 
             return View();
         }
 
-        public IActionResult PersonalInformation()
+        [Authorize(Policy = "Approved")]
+        public async Task<IActionResult> PersonalInformation(string stringId)
         {
-            return View();
+            long receivedID = long.Parse(stringId);
+
+            long userIDClaim = _authService.GetIDClaim();
+
+            if (receivedID != userIDClaim)
+            {
+                return Unauthorized();
+            }
+
+            PersonalInfoViewModel personalInfo = await _adminService.GetPersonalInfoAsync(userIDClaim);
+
+            return View(personalInfo);
+        }
+
+        [Authorize(Policy = "Approved")]
+        public IActionResult DeleteInfo(long Id)
+        {
+            return View(Id);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePersonalInfo(long Id)
+        {
+            // Id is being successfully picked up. Make service method 
+            await _adminService.DeleteUser(Id);
+
+            // Invoke logout method before routing to login
+            await HttpContext.SignOutAsync("DefaultCookie");
+
+            return Redirect("../Login");
         }
     }
 }

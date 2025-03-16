@@ -44,12 +44,12 @@ namespace BusinessReportingMVC.Repositories
             return null;
         }
 
-        public async Task<User?> GetAllUserClaimsAsync(User user)
+        public async Task<User?> GetUserAndClaimsAsync(long id) // Change 
         {
             return await _context.Users
                                     .Include(r => r.UserClaims)
                                         .ThenInclude(uc => uc.Claim)
-                                    .FirstOrDefaultAsync(r => r.UserId == user.UserId);
+                                    .FirstOrDefaultAsync(r => r.UserId == id);
         }
 
         public async Task<List<Claim>> GetAllDBClaimsAsync()
@@ -101,6 +101,18 @@ namespace BusinessReportingMVC.Repositories
                                     .Where(r => r.IsDraft == false && r.IsDeleted == false)
                                     .Include(r => r.CreatedByUser)
                                     .ToListAsync();
+        }
+
+        // =========
+        // || Admin
+        // =========
+        public async Task<List<User>> GetAllNonAdminUsers()
+        {
+            return await _context.Users
+                .Include(u => u.UserClaims)
+                    .ThenInclude(uc => uc.Claim)
+                .Where(u => !u.UserClaims.Any(uc => uc.Claim.ClaimName == "Admin"))
+                .ToListAsync();
         }
     }
 }

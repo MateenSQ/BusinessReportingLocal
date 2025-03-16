@@ -2,16 +2,19 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    var Role = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
+
+    var UserId = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
 }
 
 <div class="section">
     <h1>Manage</h1>
 
     <div>
-        <a class="homeAnch" asp-controller="Account" asp-action="PersonalInformation">Manage Personal Information</a>
+        <a class="homeAnch" asp-controller="Account" asp-action="PersonalInformation" asp-route-stringId="@UserId">Manage Personal Information</a>
         <br />
 
-        @if (User.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value == "Admin")
+        @if (Role == "Admin")
         {
             <a class="homeAnch" asp-controller="Admin" asp-action="ManageUsers">Manage Other Users</a>
         }

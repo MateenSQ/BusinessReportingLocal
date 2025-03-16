@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 // Aliases
 using SecurityClaim = System.Security.Claims.Claim;
 using ModelClaim = BusinessReportingMVC.Models.Claim;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessReportingMVC.Services
 {
@@ -70,7 +71,7 @@ namespace BusinessReportingMVC.Services
                 };
             }
 
-            user = await _repo.GetAllUserClaimsAsync(user);
+            user = await _repo.GetUserAndClaimsAsync(user.UserId);
 
             string roleClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Role").Claim.ClaimName;
             string positionClaim = user.UserClaims.FirstOrDefault(c => c.Claim.ClaimType == "Position").Claim.ClaimName;
@@ -174,5 +175,7 @@ namespace BusinessReportingMVC.Services
                 Message = "Successfully Registered"
             };
         }
+
+
     }
 }

@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IBusinessReportingRepository, BusinessReportingRepository>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 //builder.Services.AddScoped<IAuthorizationHandler, ReportOwnerHandler>();
 

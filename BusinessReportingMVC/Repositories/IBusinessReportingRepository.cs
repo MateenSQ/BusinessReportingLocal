@@ -22,8 +22,13 @@ namespace BusinessReportingMVC.Repositories
 
         public Task<Report> GetReportByIdAsync(long id);
 
-        public Task<User?> GetAllUserClaimsAsync(User user);
+        public Task<User?> GetUserAndClaimsAsync(long id);
 
         public Task<List<Report>> GetListOfAllPublishedReports();
+
+        // =========
+        // || Admin
+        // =========
+        public Task<List<User>> GetAllNonAdminUsers();
     }
 }
