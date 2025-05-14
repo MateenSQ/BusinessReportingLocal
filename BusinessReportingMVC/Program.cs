@@ -42,12 +42,17 @@ builder.Services.AddAuthorizationBuilder()
 // ======================
 // || Database & Context
 // ======================
-var defaultConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+//var defaultConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+//builder.Services.AddDbContext<BusinessReportingDbContext>(options =>
+//{
+//    options.UseSqlServer(defaultConnection);
+//});
 
 builder.Services.AddDbContext<BusinessReportingDbContext>(options =>
-{
-    options.UseSqlServer(defaultConnection);
-});
+    {
+        options.UseInMemoryDatabase("InMemoryDb");
+    });
 
 
 // ==============
