@@ -47,7 +47,8 @@ public partial class BusinessReportingDbContext : DbContext
     public virtual DbSet<UserClaim> UserClaims { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:DefaultConnection");
+        => optionsBuilder.UseInMemoryDatabase("InMemoryDB");
+        //=> optionsBuilder.UseSqlServer("Name=ConnectionStrings:DefaultConnection");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
