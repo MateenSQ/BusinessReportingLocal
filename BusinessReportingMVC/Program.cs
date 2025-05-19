@@ -11,6 +11,7 @@ builder.Services.AddScoped<IBusinessReportingRepository, BusinessReportingReposi
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddTransient<SeedData>();
 
 //builder.Services.AddScoped<IAuthorizationHandler, ReportOwnerHandler>();
 
@@ -54,11 +55,16 @@ builder.Services.AddDbContext<BusinessReportingDbContext>(options =>
         options.UseInMemoryDatabase("InMemoryDb");
     });
 
-
 // ==============
 // || Middleware
 // ==============
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<SeedData>();
+    seeder.InitializeAsync();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
