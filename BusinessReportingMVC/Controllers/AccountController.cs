@@ -8,6 +8,8 @@ using BusinessReportingMVC.ViewModels;
 // Aliases
 using SecurityClaim = System.Security.Claims.Claim;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Runtime.CompilerServices;
 
 
 
@@ -98,6 +100,7 @@ namespace BusinessReportingMVC.Controllers
         // ==============================
         // || Account Management Methods
         // ==============================
+
         [Authorize(Policy = "Approved")]
         public IActionResult Manage()
         { 
@@ -137,6 +140,55 @@ namespace BusinessReportingMVC.Controllers
             await HttpContext.SignOutAsync("DefaultCookie");
 
             return Redirect("../Login");
+        }
+
+
+        // ---------------------
+        // || In Memory Methods
+        // ---------------------
+        public async Task<IActionResult> ApproveSelf()
+        {
+            _authService.ApproveSelf();
+
+            await HttpContext.SignOutAsync("DefaultCookie");
+
+            return LocalRedirect("/");
+        }
+
+        public async Task<IActionResult> SaithRights()
+        {
+            _authService.SaithRights();
+
+            await HttpContext.SignOutAsync("DefaultCookie");
+
+            return LocalRedirect("/");
+        }
+
+        public async Task<IActionResult> SeachtRights()
+        {
+            _authService.SeachtRights();
+
+            await HttpContext.SignOutAsync("DefaultCookie");
+
+            return LocalRedirect("/");
+        }
+
+        public async Task<IActionResult> UserRights()
+        {
+            _authService.UserRights();
+
+            await HttpContext.SignOutAsync("DefaultCookie");
+
+            return LocalRedirect("/");
+        }
+
+        public async Task<IActionResult> AdminRights()
+        {
+            _authService.AdminRights();
+
+            await HttpContext.SignOutAsync("DefaultCookie");
+
+            return LocalRedirect("/");
         }
     }
 }

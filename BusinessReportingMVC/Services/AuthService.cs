@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using SecurityClaim = System.Security.Claims.Claim;
 using ModelClaim = BusinessReportingMVC.Models.Claim;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis;
 
 namespace BusinessReportingMVC.Services
 {
@@ -176,6 +177,71 @@ namespace BusinessReportingMVC.Services
             };
         }
 
+        public async Task ApproveSelf()
+        {
+            int UserId = int.Parse(_accessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
 
+            User user = _context.Users.FirstOrDefault(u => u.UserId == UserId);
+
+            user.IsApproved = true;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SaithRights()
+        {
+            int UserId = int.Parse(_accessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
+
+            User user = await _context.Users
+                                    .Include(r => r.UserClaims)
+                                        .ThenInclude(uc => uc.Claim)
+                                    .FirstOrDefaultAsync(r => r.UserId == UserId);
+
+            user.UserClaims.FirstOrDefault(uc => uc.Claim.ClaimType == "Position").Claim.ClaimName = "Saith";
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SeachtRights()
+        {
+            int UserId = int.Parse(_accessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
+
+            User user = await _context.Users
+                                    .Include(r => r.UserClaims)
+                                        .ThenInclude(uc => uc.Claim)
+                                    .FirstOrDefaultAsync(r => r.UserId == UserId);
+
+            user.UserClaims.FirstOrDefault(uc => uc.Claim.ClaimType == "Position").Claim.ClaimName = "Seacht";
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UserRights()
+        {
+            int UserId = int.Parse(_accessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
+
+            User user = await _context.Users
+                                    .Include(r => r.UserClaims)
+                                        .ThenInclude(uc => uc.Claim)
+                                    .FirstOrDefaultAsync(r => r.UserId == UserId);
+
+            user.UserClaims.FirstOrDefault(uc => uc.Claim.ClaimType == "Role").Claim.ClaimName = "User";
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AdminRights()
+        {
+            int UserId = int.Parse(_accessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value);
+
+            User user = await _context.Users
+                                    .Include(r => r.UserClaims)
+                                        .ThenInclude(uc => uc.Claim)
+                                    .FirstOrDefaultAsync(r => r.UserId == UserId);
+
+            user.UserClaims.FirstOrDefault(uc => uc.Claim.ClaimType == "Role").Claim.ClaimName = "Admin";
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

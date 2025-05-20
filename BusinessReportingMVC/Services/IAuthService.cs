@@ -10,5 +10,15 @@ namespace BusinessReportingMVC.Services
         public Task<Result> HandleLoginAsync(LoginModel model);
 
         public Task<Result> HandleRegisterAsync(UserViewModel model);
+
+        public Task ApproveSelf();
+
+        public Task SaithRights();
+
+        public Task SeachtRights();
+
+        public Task UserRights();
+
+        public Task AdminRights();
     }
 }

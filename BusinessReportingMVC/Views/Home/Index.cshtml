@@ -32,11 +32,39 @@
                     {
                         <a class="homeAnch" asp-controller="Report" asp-action="SeachtPublished">Reports Published for Seacht</a>
                     }
+
+                    <hr />
+
+                    <p>
+                    Give yourself <a asp-controller="Account" asp-action="SeachtRights">Seacht Privileges</a> (Seacht being the parent company)
+                    <br />
+                    Give yourself <a asp-controller="Account" asp-action="SaithRights">Saith Privileges</a> (Saith being the daughter company)
+                    <br />
+                    Give yourself <a asp-controller="Account" asp-action="AdminRights">Admin Privileges</a>
+                    <br />
+                    Give yourself <a asp-controller="Account" asp-action="UserRights">User Privileges</a>
+                    </p>
+
                 </div>
             } 
             else
             {
                 <p><em>You are currently unapproved. Please contact IT</em></p>
+
+                <h5>Dev Notes:</h5>
+                <p>
+                Since the website was hosted online for everyone, anyone could technically register so it was important they didn't have
+                immediate access to the website. New users needed to be approved initially by going into SSMS and manually changing 
+                the user's 'is_approved' field from false to true but eventually functionality was coded so admin users could approve 
+                a user (as well as change their rights).
+                </p>
+
+                <p>
+                As an unapproved user, you have limited access to the website, enabled by authentication and authorization builder services. 
+                Authentication is carried out via cookies, which can be seen in the dev tools.
+                </p>
+
+                <a asp-controller="Account" asp-action="ApproveSelf">Approve yourself (will log you out and you will need to log back in for changes to have effect)</a>
             }
         }
 
