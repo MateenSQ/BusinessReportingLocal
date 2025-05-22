@@ -7,6 +7,8 @@ Business Reporting Software (truly couldn't think of a better name), is a projec
   <li>SQL Server & SQL Server Managment Studio</li>
   <li>Entity Framework Core</li>
   <li>Razor Pages</li>
+  <li>Bootstrap</li>
+  <li>CSS</li>
 </ul>
 
 # Using the App
