@@ -1,11 +1,11 @@
 # Contents
-<ul>
-  <li><a href="./#Introduction">Introduction</li>
-  <li></li>
-</ul>
+- [Introduction](#Introduction)
+- [Technologies & etc.]
 
 # Introduction 
 Business Reporting Software (truly couldn't think of a better name), is a project I created whilst working at Saith Limited. As the name suggests, the primary purpose of the software was to allow people from different daughter companies to create reports on their company finances, share these reports with Seacht to help make business decisions. Such an app required user accounts, CRUD actions for reports, carefully selected resource access management, user management and more.
+
+It was a project I created nearly entirely in my lonesome, with minimal web development experience and having started learning C# only ~6 months before creating the project. I was solely responsible for planning, requirements analysis, design, development. I received some assitance during development and lots during deployment
 
 ## Technologies & etc.
 <ul>
