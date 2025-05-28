@@ -1,3 +1,9 @@
+# Contents
+<ul>
+  <li><a href="./#Introduction">Introduction</li>
+  <li></li>
+</ul>
+
 # Introduction 
 Business Reporting Software (truly couldn't think of a better name), is a project I created whilst working at Saith Limited. As the name suggests, the primary purpose of the software was to allow people from different daughter companies to create reports on their company finances, share these reports with Seacht to help make business decisions. Such an app required user accounts, CRUD actions for reports, carefully selected resource access management, user management and more.
 
