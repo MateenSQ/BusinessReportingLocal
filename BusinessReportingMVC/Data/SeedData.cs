@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.AspNetCore.Identity;
+﻿using BusinessReportingMVC.Models;
 
 namespace BusinessReportingMVC.Data
 {
@@ -20,32 +18,39 @@ namespace BusinessReportingMVC.Data
                 return;
             }
 
-            _context.Add(new Models.Claim
+            _context.Add(new Claim
             {
                 ClaimId = 1,
                 ClaimType = "Role",
                 ClaimName = "Admin"
             });
 
-            _context.Add(new Models.Claim
+            _context.Add(new Claim
             {
                 ClaimId = 2,
                 ClaimType = "Role",
                 ClaimName = "User"
             });
 
-            _context.Add(new Models.Claim
+            _context.Add(new Claim
             {
                 ClaimId = 3,
                 ClaimType = "Position",
                 ClaimName = "Seacht"
             });
 
-            _context.Add(new Models.Claim
+            _context.Add(new Claim
             {
                 ClaimId = 4,
                 ClaimType = "Position",
                 ClaimName = "MD"
+            });
+
+            _context.Add(new User
+            {
+                UserId = 1,
+                Email = "John@email.com",
+                Name = ""
             });
 
             _context.SaveChanges();

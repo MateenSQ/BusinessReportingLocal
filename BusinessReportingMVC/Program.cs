@@ -60,6 +60,9 @@ builder.Services.AddDbContext<BusinessReportingDbContext>(options =>
 // ==============
 var app = builder.Build();
 
+// Docker, may not need 
+//app.Urls.Add($"http://0.0.0.0:{Environment.GetEnvironmentVariable("Port")}");
+
 using (var scope = app.Services.CreateScope())
 {
     var seeder = scope.ServiceProvider.GetRequiredService<SeedData>();
