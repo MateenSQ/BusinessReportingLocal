@@ -20,7 +20,7 @@ It was a project I created nearly entirely in my lonesome, with minimal web deve
 # Using the App
 
 ## App Link
-Find the app <a href="">here</a>.
+Find the app <a href="https://business-reporting.onrender.com/">here</a>.
 
 ## Creating an Account
 You will be met with a login screen with an option to register using an email, name and password. Email structure is enforced, it is recommended to use a small faux email, like "1@1.com" (and copy it the clipboard) as you may need to logout and login if you wish to experience different roles in the app.
