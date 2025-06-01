@@ -37,4 +37,4 @@ Financial Reports are the core of the app. These reports are easily created and 
 Providing yourself with the "Seacht" claim would allow you to view any published report. Employees of Seacht would utilize the information as they see fit, also able to make reports to publish for other Seacht persons to see.
 
 ## Admin Access
-Providing yourself 
+Providing yourself with "Admin" claim allows you to manage other users, able to change their approved status and claims
