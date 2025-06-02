@@ -1,24 +1,14 @@
-This app has substitued an SQL Server with Entity Framework Core's In Memory data, to avoid requiring another service for this app. 
+<strong>This app has substitued an SQL Server with Entity Framework Core's In Memory data, to avoid requiring another service for this app. Check the main branch to see code that interacts with an SQL Server database.</strong>
 
 # Contents
 - [Introduction](#Introduction)
-- [Technologies & etc.](##technologies-&-etc.)
 - [Using the App](#using-the-app)
+- [About](#About)
 
 # Introduction 
 Business Reporting Software (truly couldn't think of a better name), is a project I created whilst working at Saith Limited. As the name suggests, the primary purpose of the software was to allow people from different daughter companies to create reports on their company finances, share these reports with Seacht to help make business decisions. Such an app required user accounts, CRUD actions for reports, carefully selected resource access management, user management and more.
 
 It was a project I created nearly entirely in my lonesome, with minimal web development experience and having started learning C# only ~6 months before creating the project. I was solely responsible for planning, requirements analysis, design, development. I received some assitance during development and lots during deployment, but everything else was managed by myself.
-
-## Technologies & etc.
-<ul>
-  <li>ASP.NET (8) Core MVC</li>
-  <li>SQL Server & SQL Server Managment Studio</li>
-  <li>Entity Framework Core</li>
-  <li>Razor Pages</li>
-  <li>Bootstrap</li>
-  <li>CSS</li>
-</ul>
 
 # Using the App
 
@@ -39,3 +29,18 @@ Providing yourself with the "Seacht" claim would allow you to view any published
 
 ## Admin Access
 Providing yourself with "Admin" claim allows you to manage other users, available by clicking on 'Your Account' on the top right and then 'Manage Other Users'. Admins can approve newly registered users as well as give users the appropriate rights they should have.
+
+
+# About
+The website is an ASP.NET Core MVC web application containerized with Docker and hosted on Render. The app originally worked with an SQL Server database but to avoid excessive modification this personal version works with EF Core's in memory database.
+
+## Technologies & etc.
+<ul>
+  <li>ASP.NET (8) Core MVC</li>
+  <li>SQL Server & SQL Server Managment Studio</li>
+  <li>Entity Framework Core</li>
+  <li>Razor Pages</li>
+  <li>Bootstrap</li>
+  <li>CSS</li>
+</ul>
+
