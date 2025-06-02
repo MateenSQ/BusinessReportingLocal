@@ -13,8 +13,7 @@ It was a project I created nearly entirely in my lonesome, with minimal web deve
 # Using the App
 
 ## App Link
-Find the app <a href="https://business-reporting.onrender.com/" target="_blank">here</a>.
-
+Find the app <a href="https://business-reporting.onrender.com/" target="_blank">here</a>. It should take under a minute to load.
 ## Creating an Account
 You will be met with a login screen with an option to register using an email, name and password. Email structure is enforced, it is recommended to use a small faux email, like "1@1.com" (and copy it the clipboard) as you may need to logout and login if you wish to experience different roles in the app. Unapproved users are unable to access any part of the application that doesn't involve logging in, registering or the home page. This was necessary as the website couldn't be hosted on a local network but the wide web, preventing stray users from accessing the app.
 
