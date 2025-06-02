@@ -3,6 +3,7 @@ This app has substitued an SQL Server with Entity Framework Core's In Memory dat
 # Contents
 - [Introduction](#Introduction)
 - [Technologies & etc.](##technologies--etc)
+- [Using the App](#using--the--app)
 
 # Introduction 
 Business Reporting Software (truly couldn't think of a better name), is a project I created whilst working at Saith Limited. As the name suggests, the primary purpose of the software was to allow people from different daughter companies to create reports on their company finances, share these reports with Seacht to help make business decisions. Such an app required user accounts, CRUD actions for reports, carefully selected resource access management, user management and more.
@@ -37,4 +38,4 @@ Financial Reports are the core of the app. These reports are easily created and 
 Providing yourself with the "Seacht" claim would allow you to view any published report. Employees of Seacht would utilize the information as they see fit, also able to make reports to publish for other Seacht persons to see.
 
 ## Admin Access
-Providing yourself with "Admin" claim allows you to manage other users, able to change their approved status and claims
+Providing yourself with "Admin" claim allows you to manage other users, available by clicking on 'Your Account' on the top right and then 'Manage Other Users'. Admins can approve newly registered users as well as give users the appropriate rights they should have.
